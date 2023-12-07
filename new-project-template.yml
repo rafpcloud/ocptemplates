@@ -1,0 +1,35 @@
+  kind: RoleBinding
+  metadata:
+    creationTimestamp: null
+    name: az-pipeline
+    namespace: ${PROJECT_NAME}
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: pipeline-deployer
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: ${PROJECT_ADMIN_USER}
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: ClusterRole
+    name: registry-editor
+  subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: deploy-dev
+
+- apiVersion: user.openshift.io/v1
+  kind: Group
+  metadata:
+    name: "${GROUP}"
+    users: deploy-dev
+parameters:
+- name: GROUP
+  value: grp_e_"${PROJECT_NAME}"
+- name: PROJECT_NAME
+- name: PROJECT_DISPLAYNAME
+- name: PROJECT_DESCRIPTION
+- name: PROJECT_ADMIN_USER
+- name: PROJECT_REQUESTING_USER
