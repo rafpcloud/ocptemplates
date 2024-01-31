@@ -18,13 +18,13 @@
   subjects:
   - apiGroup: rbac.authorization.k8s.io
     kind: User
-    name: deploy-dev
+    name: deploy.dev
 
 - apiVersion: user.openshift.io/v1
   kind: Group
   metadata:
     name: "${GROUP}"
-    users: deploy-dev
+    users: deploy.dev
 parameters:
 - name: GROUP
   value: grp_e_"${PROJECT_NAME}"
